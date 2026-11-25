@@ -10,6 +10,8 @@ Runs in a sandbox with no network.
 
 import os
 
+MAX_CHARS = 100  # the gate: /output/entry.txt must be 1-100 characters
+
 LINE = "fix: resolve the race condition by disqualifying the second runner"
 
 OUTPUT_PATH = "/output/entry.txt"
@@ -17,7 +19,7 @@ OUTPUT_PATH = "/output/entry.txt"
 
 def main() -> None:
     line = LINE.replace("\n", " ").strip()
-    assert 1 <= len(line) <= 100, f"entry is {len(line)} characters"
+    assert 1 <= len(line) <= MAX_CHARS, f"entry is {len(line)} characters"
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(line)
